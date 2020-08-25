@@ -28,22 +28,22 @@ function TodoForm({ addTodo }) {
 
 function App() {
   const [todos, setTodos] = useState([
-    { 
+    {
       text: "Learn about React",
-     isCompleted: false
-    },
-    { 
-      text: "Meet friend for lunch", 
       isCompleted: false
     },
-    { 
+    {
+      text: "Meet friend for lunch",
+      isCompleted: false
+    },
+    {
       text: "Build a really cool todo app",
       isCompleted: false
     }
   ]);
 
   const addTodo = text => {
-    const newTodos = [...todos, {text}];
+    const newTodos = [...todos, { text }];
     setTodos(newTodos);
   };
 
@@ -59,12 +59,11 @@ function App() {
     setTodos(newTodos);
   };
 
-  function Todo ({todo, index, completeTodo, removeTodo}){
-    return(
+  function Todo({ todo, index, completeTodo, removeTodo }) {
+    return (
       <div
-      className="todo"
-      style={{textDecoration: todo.isCompleted ? "line-through" : "" }}
-      >
+        className="todo"
+        style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
         {todo.text}
         <div>
           <button onClick={() => completeTodo(index)}>Complete</button>
@@ -86,7 +85,7 @@ function App() {
             removeTodo={removeTodo}
           />
         ))}
-        <TodoForm addTodo={addTodo}/>
+        <TodoForm addTodo={addTodo} />
       </div>
     </div>
   );
