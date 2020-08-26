@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { getAllByPlaceholderText } from '@testing-library/react';
 
-//const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+const Todo = ({ todo }) => <div className="todo">{todo.name}</div>;
 
 function TodoForm({ addTodo }) {
   const [value, setValue] = useState("");
@@ -29,21 +30,32 @@ function TodoForm({ addTodo }) {
 function App() {
   const [todos, setTodos] = useState([
     {
-      text: "Learn about React",
-      isCompleted: false
+      id: 1,
+      name: "Learn about React",
+      isCompleted: false,
+      description: "  I want to learn about react and stuff",
+      date: new Date().toLocaleString()
     },
     {
-      text: "Meet friend for lunch",
-      isCompleted: false
+      id: 2,
+      name: "Meet friend for lunch",
+      isCompleted: false,
+      description: "A FRIEND AND I ARE GOING TO GET PASTA",
+      date: new Date().toLocaleString()
     },
     {
-      text: "Build a really cool todo app",
-      isCompleted: false
+      id: 3,
+      name: "Build a really cool todo app",
+      isCompleted: false,
+      description: "the app that youre looking at must be prettier",
+      date: new Date().toLocaleString()
     }
   ]);
 
-  const addTodo = text => {
-    const newTodos = [...todos, { text }];
+
+
+  const addTodo = name => {
+    const newTodos = [...todos, { name }];
     setTodos(newTodos);
   };
 
@@ -64,7 +76,10 @@ function App() {
       <div
         className="todo"
         style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-        {todo.text}
+        {todo.id}
+        {todo.name}
+        {todo.description}
+        {todo.date}
         <div>
           <button onClick={() => completeTodo(index)}>Complete</button>
           <button onClick={() => removeTodo(index)}>x</button>
