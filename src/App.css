@@ -61,3 +61,8 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.todo-content {
+  display: flex;
+  flex-direction: column;
+}
