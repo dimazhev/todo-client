@@ -23,7 +23,7 @@ const todos = [
 ];
 
 class TodoApi {
-    add(todo){
+    add(todo) {
         todos.push(todo);
     }
 
@@ -48,7 +48,7 @@ class TodoApi {
         }
         return todo;
     }
-    
+
     deleteByID(todoID) {
         const todo = this.getAll().find(c => c.id === parseInt(todoID));
         if (!todo) return null;
@@ -58,3 +58,6 @@ class TodoApi {
         return todo;
     }
 } 
+
+// Export the TodoApi to be visible to other files
+export default new TodoApi();
