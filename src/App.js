@@ -34,14 +34,14 @@ function App() {
 
   // TODO: Alex L - try to redo the logic using todoApi
   const completeTodo = index => {
-    const newTodos = [...todos];
+    const newTodos = [...todoApi.getAll()];
     newTodos[index].isCompleted = true;
     setTodos(newTodos);
   };
 
   // TODO: Alex L - try to redo the logic using todoApi
   const removeTodo = index => {
-    const newTodos = [...todos];
+    const newTodos = [...todoApi.getAll()];
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
