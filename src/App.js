@@ -33,7 +33,6 @@ function App() {
     setTodos([...todoApi.getAll()]);
   };
 
-  // TODO: Alex L - try to redo the logic using todoApi
   const completeTodo = index => {
     const currentTodos = [...todoApi.getAll()];
     const todoToUpdate = currentTodos[index];
@@ -42,7 +41,10 @@ function App() {
   };
 
   const uncompleteTodo = index => {
-    // Left as exercise
+    const currentTodos = [...todoApi.getAll()];
+    const todoToReverse = currentTodos[index];
+    todoApi.updateByID(todoToReverse.id, {isCompleted: false})
+    setTodos([...todoApi.getAll()]);
   }
 
   const removeTodo = index => {
