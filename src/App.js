@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import todoApi from './api/todoApi';
 import './App.css';
 import TodoForm from './components/TodoForm';
+import Todo from './components/Todo';
 
 function App() {
   // useState is a hook that helps you manage the state (i.e. the values in the component).
@@ -20,7 +21,7 @@ function App() {
   const addTodo = name => {
     const newTodo = {
       name, // same as writing `name: name`
-      description: "Missing desc",
+      description: "N/A",
       isCompleted: false
     }
     // Call todoApi.add to update the todos
@@ -32,46 +33,26 @@ function App() {
     setTodos([...todoApi.getAll()]);
   };
 
-  // TODO: Alex L - try to redo the logic using todoApi
   const completeTodo = index => {
-    const newTodos = [...todoApi.getAll()];
-    newTodos[index].isCompleted = true;
-    setTodos(newTodos);
+    const currentTodos = [...todoApi.getAll()];
+    const todoToUpdate = currentTodos[index];
+    todoApi.updateByID(todoToUpdate.id, { isCompleted: true })
+    setTodos([...todoApi.getAll()]);
   };
 
-  // TODO: Alex L - try to redo the logic using todoApi
-  const removeTodo = index => {
-    const newTodos = [...todoApi.getAll()];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
-
-  function Todo({ todo, index, completeTodo, removeTodo }) {
-
-    function KeyValue({ label, children }) {
-      return (
-        <div>
-          <span style={{ fontWeight: "bold" }}>{label}: </span>{children}
-        </div>
-      );
-    }
-
-    return (
-      <div
-        className="todo"
-        style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-        <div className="todo-content">
-          <KeyValue label="ID">{todo.id}</KeyValue>
-          <KeyValue label="Name">{todo.name}</KeyValue>
-          <KeyValue label="Description">{todo.description}</KeyValue>
-        </div>
-        <div>
-          <button onClick={() => completeTodo(index)}>Complete</button>
-          <button onClick={() => removeTodo(index)}>x</button>
-        </div>
-      </div>
-    );
+  const uncompleteTodo = index => {
+    const currentTodos = [...todoApi.getAll()];
+    const todoToReverse = currentTodos[index];
+    todoApi.updateByID(todoToReverse.id, {isCompleted: false})
+    setTodos([...todoApi.getAll()]);
   }
+
+  const removeTodo = index => {
+    const currentTodos = [...todoApi.getAll()];
+    const todoToDelete = currentTodos[index];
+    todoApi.deleteByID(todoToDelete.id);
+    setTodos([...todoApi.getAll()]);
+  };
 
   return (
     <div className="app">
@@ -82,6 +63,7 @@ function App() {
             index={index}
             todo={todo}
             completeTodo={completeTodo}
+            uncompleteTodo={uncompleteTodo}
             removeTodo={removeTodo}
           />
         ))}

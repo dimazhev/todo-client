@@ -22,8 +22,12 @@ const todos = [
     }
 ];
 
+let maxId = todos.length;
+
 class TodoApi {
     add(todo) {
+        maxId++
+        todo.id = maxId;
         todos.push(todo);
     }
 
@@ -37,7 +41,7 @@ class TodoApi {
 
         const { isCompleted, description } = data
 
-        const isNotNullOrUndefined = value => value !== null || value !== undefined
+        const isNotNullOrUndefined = value => value !== null && value !== undefined
 
         if (isNotNullOrUndefined(isCompleted)) {
             todo.isCompleted = isCompleted
