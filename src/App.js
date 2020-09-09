@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import todoApi from './api/todoApi';
-import './App.css';
-import TodoForm from './components/TodoForm';
-import Todo from './components/Todo';
+import React, { useEffect, useState } from "react";
+import todoApi from "./api/todoApi";
+import "./App.css";
+import TodoForm from "./components/TodoForm";
+import Todo from "./components/Todo";
 
 function App() {
   // useState is a hook that helps you manage the state (i.e. the values in the component).
   // useState returns two things 1. the data, 2. a function to update the data
   // in this case the state is the `todos` and the way  to update the state is using `setTodos`
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([]);
 
   // useEffect is called when the component is being `mounted`
   useEffect(() => {
@@ -18,12 +18,12 @@ function App() {
     setTodos(data);
   }, []);
 
-  const addTodo = name => {
+  const addTodo = (name) => {
     const newTodo = {
       name, // same as writing `name: name`
       description: "N/A",
-      isCompleted: false
-    }
+      isCompleted: false,
+    };
     // Call todoApi.add to update the todos
     todoApi.add(newTodo);
 
@@ -33,21 +33,21 @@ function App() {
     setTodos([...todoApi.getAll()]);
   };
 
-  const completeTodo = index => {
+  const completeTodo = (index) => {
     const currentTodos = [...todoApi.getAll()];
     const todoToUpdate = currentTodos[index];
-    todoApi.updateByID(todoToUpdate.id, { isCompleted: true })
+    todoApi.updateByID(todoToUpdate.id, { isCompleted: true });
     setTodos([...todoApi.getAll()]);
   };
 
-  const uncompleteTodo = index => {
+  const uncompleteTodo = (index) => {
     const currentTodos = [...todoApi.getAll()];
     const todoToReverse = currentTodos[index];
-    todoApi.updateByID(todoToReverse.id, {isCompleted: false})
+    todoApi.updateByID(todoToReverse.id, { isCompleted: false });
     setTodos([...todoApi.getAll()]);
-  }
+  };
 
-  const removeTodo = index => {
+  const removeTodo = (index) => {
     const currentTodos = [...todoApi.getAll()];
     const todoToDelete = currentTodos[index];
     todoApi.deleteByID(todoToDelete.id);
@@ -72,6 +72,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
